@@ -20,15 +20,17 @@ source options.sh
 mkdir -p $LOCAL_BIN
 
 
-# add 32-bit support
-$SUDO dpkg --add-architecture i386
-
-
 # install packages
 $SUDO apt -yq update && $SUDO apt -yq upgrade
 $INSTALL git wget unzip curl
 $INSTALL build-essential python3-dev python3-venv libc6-dbg
-$INSTALL libc6-dbg:i386
+
+
+if [ $ARCH32 -eq 1 ]; then
+    $SUDO dpkg --add-architecture i386
+    $SUDO apt -yq update
+    $INSTALL libc6-dbg:i386
+fi
 
 
 if [ $KERNEL_OPT -eq 1 ]; then
