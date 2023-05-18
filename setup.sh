@@ -81,7 +81,10 @@ if [[ ! -d "$HOME/.venv" ]]; then
     deactivate
 fi
 
-str='VIRTUAL_ENV_DISABLE_PROMPT=true source $HOME/.venv/hack/bin/activate
+str='alias gf="git fetch origin main:main"
+alias checkdoc="RUSTDOCFLAGS=\"-D warnings\" cargo doc --no-deps --document-private-items"
+
+VIRTUAL_ENV_DISABLE_PROMPT=true source $HOME/.venv/hack/bin/activate
 '
 RC="$RC
 $str"
